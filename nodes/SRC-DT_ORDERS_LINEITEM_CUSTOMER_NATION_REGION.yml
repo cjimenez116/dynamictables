@@ -1,0 +1,76 @@
+steps:
+  DT_ORDERS_LINEITEM_CUSTOMER_NATION_REGION-9236bab3-f238-4f54-9875-f02dba2f12a6:
+    operation:
+      config:
+        downstreamOption: false
+        groupByAll: true
+        insertStrategy: UNION
+        lagSpecification:
+          items:
+            - lagPeriod: Minutes
+              lagValue: "5"
+        selectDistinct: false
+        warehouseName: dev_wh_xs
+      database: ""
+      deployEnabled: true
+      description: ""
+      isMultisource: false
+      locationName: SRC
+      materializationType: Dynamic Table
+      metadata:
+        appliedNodeTests: []
+        columns:
+          - columnReference:
+              columnCounter: d1a418be-9524-4672-aa7c-d85fe5c72478
+              stepCounter: 9236bab3-f238-4f54-9875-f02dba2f12a6
+            dataType: VARCHAR(25)
+            description: ""
+            hashColumns: []
+            hashDetails: null
+            name: C_NAME
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 0d0cab5a-fa02-4808-9db8-f411664773f9
+                    stepCounter: 8a05d740-711f-4ce3-bbc2-689a8ed206db
+                transform: ""
+          - columnReference:
+              columnCounter: 34ee08d2-5093-41a6-9345-adf68110792a
+              stepCounter: 9236bab3-f238-4f54-9875-f02dba2f12a6
+            dataType: NUMBER(12,2)
+            description: ""
+            hashColumns: []
+            hashDetails: null
+            name: L_QUANTITY
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 987d364d-543d-4a6d-822c-51daf8394bca
+                    stepCounter: a63625d9-fb2a-451d-9494-929d80469079
+                transform: sum("DT_ORDERS_LINEITEM"."L_QUANTITY")
+        cteString: ""
+        enabledColumnTestIDs: []
+        sourceMapping:
+          - aliases:
+              DT_CUSTOMER_NATION_REGION: 8a05d740-711f-4ce3-bbc2-689a8ed206db
+              DT_ORDERS_LINEITEM: a63625d9-fb2a-451d-9494-929d80469079
+            customSQL:
+              customSQL: ""
+            dependencies:
+              - locationName: SRC
+                nodeName: DT_CUSTOMER_NATION_REGION
+              - locationName: SRC
+                nodeName: DT_ORDERS_LINEITEM
+            join:
+              joinCondition: |-
+                FROM {{ ref('SRC', 'DT_ORDERS_LINEITEM') }} "DT_ORDERS_LINEITEM"
+                INNER JOIN {{ ref('SRC', 'DT_CUSTOMER_NATION_REGION') }} "DT_CUSTOMER_NATION_REGION"
+                ON "DT_ORDERS_LINEITEM"."O_CUSTKEY" = "DT_CUSTOMER_NATION_REGION"."C_CUSTKEY"
+            name: DT_ORDERS_LINEITEM_CUSTOMER_NATION_REGION
+            noLinkRefs: []
+      name: DT_ORDERS_LINEITEM_CUSTOMER_NATION_REGION
+      overrideSQL: false
+      schema: ""
+      sqlType: "5"
+      type: sql
+    stepCounter: 9236bab3-f238-4f54-9875-f02dba2f12a6
