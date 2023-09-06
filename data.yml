@@ -7,11 +7,17 @@ locations:
       "12":
         database: CJIMENEZ_QA
         schema: SOURCE_DATA
+      "13":
+        database: CJIMENEZ_PROD
+        schema: SOURCE_DATA
   WORK:
     mappingDefinitions:
       "12":
         database: CJIMENEZ_QA
         schema: REPORTING
+      "13":
+        database: CJIMENEZ_PROD
+        schema: PUBLIC
 macros: {}
 packages: {}
 projects: {}
